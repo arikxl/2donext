@@ -1,10 +1,11 @@
 import AppHeader from "@/components/AppHeader"
+import Board from "@/components/Board"
 
 export default function Home() {
   return (
     <main className="">
       <AppHeader />
-      <h1>2doNext</h1>
+      <Board />
      
     </main>
   )
