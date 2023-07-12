@@ -1,5 +1,4 @@
 import { databases } from "@/appwrite"
-import Board from "@/components/Board";
 
 export const getTodosGroupByColumn = async () => {
     const data = await databases.listDocuments(
@@ -25,19 +24,20 @@ export const getTodosGroupByColumn = async () => {
             ...(todo.img && { img: todo.img })
             // ...(todo.img && { img: JSON.parse(todo.img) })
         });
-
         return acc;
 
         
     }, new Map<TypeColumn, Column>)
-    
 
     const columnTypes: TypeColumn[] = ['todo', 'inProgress', 'done'];
     for (const columnType of columnTypes) {
-        columns.set(columnType, {
-            id: columnType,
-            todos: []
-        });
+        if (!columns.get(columnType)) {
+            
+            columns.set(columnType, {
+                id: columnType,
+                todos: []
+            });
+        }
     }
 
     const sortedColumns = new Map(
