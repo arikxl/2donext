@@ -10,8 +10,13 @@ import { start } from 'repl';
 
 const Board = () => {
 
-    const [board, getBoard, setBoardState] =
-        useBoardStore((state) => [state.board, state.getBoard, state.setBoardState])
+    const [board, getBoard, setBoardState, updateDotosInDB] =
+        useBoardStore((state) => [
+            state.board,
+            state.getBoard,
+            state.setBoardState,
+            state.updateDotosInDB
+        ]);
     
     useEffect(() => {
         getBoard();
@@ -71,6 +76,8 @@ const Board = () => {
                 id: finishCol.id,
                 todos: finishTodos
             });
+
+            updateDotosInDB(todoMoved, finishCol.id);
 
             setBoardState({ ...board, columns: newColumns })
         }
