@@ -1,9 +1,11 @@
 'use client'
 
 
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useModalStore } from '@/store/ModalStore';
+import { useBoardStore } from '@/store/BoardStore';
+import TaskTypeRadioGroup from './TaskTypeRadioGroup';
 
 function Modal() {
 
@@ -11,6 +13,11 @@ function Modal() {
         state.isOpen,
         state.closeModal
     ]);
+
+    const [newTaskInput, setNewTaskInput] = useBoardStore((state) => [
+        state.newTaskInput,
+        state.setNewTaskInput
+    ])
 
 
     return (
@@ -47,8 +54,15 @@ function Modal() {
                                 <Dialog.Title as="h3" className='text-lg font-medium loading-6 text-gray-900 pb-2'>
                                     Add a Todo
                                 </Dialog.Title>
-                        </Dialog.Panel>
-
+                                <div className='mt-2'>
+                                    <input type='text' value={newTaskInput}
+                                        placeholder='Enter a new todo here...'
+                                        onChange={(e) => setNewTaskInput(e.target.value)}
+                                        className='w-full border border-gray-300 rounded-md outline-none p-5'
+                                    />
+                                </div>
+                                    <TaskTypeRadioGroup />
+                            </Dialog.Panel>
 
                         </Transition.Child>
                     </div>
