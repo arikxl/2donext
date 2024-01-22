@@ -16,27 +16,29 @@ function Modal() {
         state.closeModal
     ]);
 
-    const [img, setImage, newTaskInput, setNewTaskInput] = useBoardStore((state) => [
+    const [addTask, img, setImage, newTaskInput, setNewTaskInput] = useBoardStore((state) => [
         state.newTaskInput,
         state.setNewTaskInput,
         state.img,
         state.setImage,
+        state.addTask,
     ])
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!newTaskInput) return;
+    // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     if (!newTaskInput) return;
 
+    //     addTask(newTaskInput,newTaskType, img )
 
-        setImage(null);
-        closeModal();
-    }
+    //     setImage(null);
+    //     closeModal();
+    // }
 
     return (
         // Use the `Transition` component at the root level
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="form" onClose={closeModal} className='relative z-10'
-                onSubmit={(e) => handleSubmit(e)}
+                // onSubmit={(e) => handleSubmit(e)}
             >
 
                 <Transition.Child
@@ -69,9 +71,10 @@ function Modal() {
                                     Add a Todo
                                 </Dialog.Title>
                                 <div className='mt-2'>
-                                    <input type='text' value={newTaskInput}
+                                    <input type='text'
+                                        // value={newTaskInput}
                                         placeholder='Enter a new todo here...'
-                                        onChange={(e) => setNewTaskInput(e.target.value)}
+                                        // onChange={(e) => setNewTaskInput(e.target.value)}
                                         className='w-full border border-gray-300 rounded-md outline-none p-5'
                                     />
                                 </div>
@@ -92,10 +95,11 @@ function Modal() {
                                                 width={200} height={200}
                                                 className=' w-full h-44 object-cover mt-2 filter 
                                                 hover:grayscale transition-all duration-150 cursor-not-allowed'
-                                                src={URL.createObjectURL(img)}
+                                                // src={URL.createObjectURL(img)}
+                                                src={img}
                                                 onClick={() => setImage(null)}
                                             />
-                                        )
+                                        ) 
                                     }
                                     <input type='file' hidden
                                         ref={imagePickerRef}
