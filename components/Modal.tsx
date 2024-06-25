@@ -24,21 +24,21 @@ function Modal() {
         state.addTask,
     ])
 
-    // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     if (!newTaskInput) return;
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!newTaskInput) return;
 
-    //     addTask(newTaskInput,newTaskType, img )
+        addTask(newTaskInput,newTaskType, img )
 
-    //     setImage(null);
-    //     closeModal();
-    // }
+        setImage(null);
+        closeModal();
+    }
 
     return (
         // Use the `Transition` component at the root level
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="form" onClose={closeModal} className='relative z-10'
-                // onSubmit={(e) => handleSubmit(e)}
+                onSubmit={(e) => handleSubmit(e)}
             >
 
                 <Transition.Child
